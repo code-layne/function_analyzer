@@ -25,4 +25,6 @@ fn main() {
     println!("Fx y-intercept: f(0) = {}", quadratic_fx.y_intercept());
     println!("First derivative: f'(x) = {}", quadratic_fx.derivative().format_pretty());
 
+    println!("Sum of two fxs = {}", quadratic_fx.add(&linear_fx).format_pretty());
+    println!("Difference of two fxs: {}", quadratic_fx.subtract(&linear_fx).format_pretty());
 }

@@ -19,6 +19,42 @@ impl Polynomial {
     pub fn degree(&self) -> usize {
         self.coefficients.len().saturating_sub(1)
     }
+    pub fn negate(&self) -> Polynomial {
+        let negated_coefficients: Vec<f64> =
+            self.coefficients.iter().map(|c| -c).collect();
+
+        Polynomial::new(negated_coefficients)
+    }
+    pub fn subtract(&self, other: &Polynomial) -> Polynomial {
+        let neg_other = other.negate();
+        self.add(&neg_other)
+    }
+    pub fn add(&self, other: &Polynomial) -> Polynomial {
+        let max_len = self.coefficients.len().max(other.coefficients.len());
+
+        let mut result = vec![0.0; max_len];
+
+        let offset_self = max_len - self.coefficients.len();
+        let offset_other = max_len - other.coefficients.len();
+
+        for i in 0..max_len {
+            let a = if i >= offset_self {
+                self.coefficients[i - offset_self]
+            } else {
+                0.0
+            };
+
+            let b = if i >= offset_other {
+                other.coefficients[i - offset_other]
+            } else {
+                0.0
+            };
+
+            result[i] = a + b;
+        }
+
+        Polynomial::new(result)
+    }
 
     pub fn evaluate(&self, x: f64) -> f64 {
         // Horner's method
