@@ -13,22 +13,26 @@ impl Polynomial {
             .unwrap_or(coefficients.len().saturating_sub(1));
 
         let trimmed = coefficients[first_nonzero..].to_vec();
-        Self { coefficients: trimmed }
+        Self {
+            coefficients: trimmed,
+        }
     }
 
     pub fn degree(&self) -> usize {
         self.coefficients.len().saturating_sub(1)
     }
+
     pub fn negate(&self) -> Polynomial {
-        let negated_coefficients: Vec<f64> =
-            self.coefficients.iter().map(|c| -c).collect();
+        let negated_coefficients: Vec<f64> = self.coefficients.iter().map(|c| -c).collect();
 
         Polynomial::new(negated_coefficients)
     }
+
     pub fn subtract(&self, other: &Polynomial) -> Polynomial {
         let neg_other = other.negate();
         self.add(&neg_other)
     }
+
     pub fn add(&self, other: &Polynomial) -> Polynomial {
         let max_len = self.coefficients.len().max(other.coefficients.len());
 
@@ -141,5 +145,16 @@ impl Polynomial {
         }
 
         out
+    }
+    pub fn multiply(&self, other: &Polynomial) -> Polynomial {
+        let mut result = vec![0.0; self.coefficients.len() + other.coefficients.len() - 1];
+
+        for i in 0..self.coefficients.len() {
+            for j in 0..other.coefficients.len() {
+                result[i + j] += self.coefficients[i] * other.coefficients[j];
+            }
+        }
+
+        Polynomial::new(result)
     }
 }
