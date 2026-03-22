@@ -56,5 +56,16 @@ fn main() {
         binomial1.format_pretty(),
         binomial2.format_pretty(),
         binomial1.multiply(&binomial2).format_pretty()
-    )
+    );
+
+    println!("Quotient of {} and {}", quadratic_fx.format_pretty(), binomial1.format_pretty());
+    match quadratic_fx.divide(&binomial1) {
+        Ok((quotient, remainder)) => {
+            println!("Quotient: {}", quotient.format_pretty());
+            println!("Remainder: {}", remainder.format_pretty());
+        }
+        Err(e) => {
+            println!("Error: {:?}", e);
+        }
+    }
 }

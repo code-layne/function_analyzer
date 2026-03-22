@@ -4,6 +4,10 @@ pub struct Polynomial {
     /// Example: x^2 - 4x + 3 => vec![1.0, -4.0, 3.0]
     pub coefficients: Vec<f64>,
 }
+#[derive(Debug)]
+pub enum PolynomialError {
+    DivisionByZeroPolynomial,
+}
 
 impl Polynomial {
     pub fn new(coefficients: Vec<f64>) -> Self {
@@ -146,6 +150,7 @@ impl Polynomial {
 
         out
     }
+
     pub fn multiply(&self, other: &Polynomial) -> Polynomial {
         let mut result = vec![0.0; self.coefficients.len() + other.coefficients.len() - 1];
 
@@ -156,5 +161,46 @@ impl Polynomial {
         }
 
         Polynomial::new(result)
+    }
+
+    pub fn divide(
+        &self,
+        divisor: &Polynomial,
+    ) -> Result<(Polynomial, Polynomial), PolynomialError> {
+        if divisor.is_zero() {
+            return Err(PolynomialError::DivisionByZeroPolynomial);
+        }
+
+        if self.degree() < divisor.degree() {
+            return Ok((Polynomial::new(vec![0.0]), self.clone()));
+        }
+
+        let mut remainder = self.clone();
+        let quotient_len = self.degree() - divisor.degree() + 1;
+        let mut quotient = vec![0.0; quotient_len];
+
+        while !remainder.is_zero() && remainder.degree() >= divisor.degree() {
+            let coefficient = remainder.coefficients[0] / divisor.coefficients[0];
+            let power_diff = remainder.degree() - divisor.degree();
+
+            let q_index = quotient_len - power_diff - 1;
+            quotient[q_index] = coefficient;
+
+            let term = Polynomial::monomial(coefficient, power_diff);
+            let product = divisor.multiply(&term);
+            remainder = remainder.subtract(&product);
+        }
+
+        Ok((Polynomial::new(quotient), remainder))
+    }
+
+    pub fn monomial(coefficient: f64, power: usize) -> Polynomial {
+        let mut coefficients = vec![coefficient];
+        coefficients.extend(std::iter::repeat(0.0).take(power));
+        Polynomial::new(coefficients)
+    }
+
+    pub fn is_zero(&self) -> bool {
+        self.coefficients.iter().all(|c| c.abs() < 1e-12)
     }
 }
