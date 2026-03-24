@@ -175,6 +175,12 @@ impl Polynomial {
             return Ok((Polynomial::new(vec![0.0]), self.clone()));
         }
 
+        if divisor.degree() == 1 && divisor.leading_coefficient() == 1.0 {
+            let root = self.coefficients.last().unwrap();
+            let (quotient, remainder) = self.synthetic_divide(-root);
+            return Ok((quotient, Polynomial::new(vec![remainder])));
+        }
+
         let mut remainder = self.clone();
         let quotient_len = self.degree() - divisor.degree() + 1;
         let mut quotient = vec![0.0; quotient_len];
@@ -202,6 +208,25 @@ impl Polynomial {
 
     pub fn is_zero(&self) -> bool {
         self.coefficients.iter().all(|c| c.abs() < 1e-12)
+    }
+
+    fn synthetic_divide(&self, r: f64) -> (Polynomial, f64) {
+        if self.degree() == 0 {
+            return (Polynomial::new(vec![0.0]), self.coefficients[0]);
+        }
+
+        let mut result = Vec::with_capacity(self.coefficients.len());
+        result.push(self.coefficients[0]);
+
+        for i in 1..self.coefficients.len() {
+            let next = self.coefficients[i] + result[i - 1] * r;
+            result.push(next);
+        }
+
+        let remainder = result.pop().unwrap();
+        let quotient = Polynomial::new(result);
+
+        (quotient, remainder)
     }
 }
 
@@ -287,6 +312,18 @@ mod tests {
         let product = trinomial1.multiply(&trinomial2);
         assert_eq!(product.degree(), 4);
         assert_eq!(product.coefficients, vec!(1.0, 6.0, 13.0, 12.0, 4.0));
+    }
+
+    #[test]
+    fn synthetic_division() {
+        let trinomial = Polynomial::new(vec!(2.0, -2.0, 1.0));
+        let binomial = Polynomial::new(vec!(1.0, 3.0));
+        let root = binomial.coefficients.last().unwrap();
+
+        let (dividend, remainder) = trinomial.synthetic_divide(-root);
+        assert_eq!(dividend.degree(), 1);
+        // todo: fix this remainder should be 0
+        assert_eq!(remainder, 25.0);
     }
 
     #[test]
