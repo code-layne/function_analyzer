@@ -7,3 +7,5 @@ function types:  polynomial, radical, rational, exponential, logarithmic, piecew
 after the initial project is completed, a skeleton project will be created 
 for students to fill in implementations for various methods using algorithms learned in the
 Algebra 2 curriculum.
+
+test edit for git workflow build
