@@ -1,3 +1,5 @@
+<img width="555" height="305" alt="image" src="https://github.com/user-attachments/assets/915df629-4a1d-4fd0-8a17-bba53b2fe660" />
+<p>
 function_analyzer is a library to implement much of the curriculum of Algebra 2 
 into a working command-line program and eventually provide a web interface.
 
