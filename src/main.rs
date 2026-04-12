@@ -56,7 +56,11 @@ fn main() {
         binomial1.multiply(&binomial2).format_pretty()
     );
 
-    println!("Quotient of {} and {}", quadratic_fx.format_pretty(), binomial1.format_pretty());
+    println!(
+        "Quotient of {} and {}",
+        quadratic_fx.format_pretty(),
+        binomial1.format_pretty()
+    );
     match quadratic_fx.divide(&binomial1) {
         Ok((quotient, remainder)) => {
             println!("Quotient: {}", quotient.format_pretty());
@@ -69,7 +73,11 @@ fn main() {
 
     let binomial1 = Polynomial::new(vec![1.0, 2.0]);
     let trinomial = Polynomial::new(vec![1.0, 5.0, 6.0]);
-    println!("Trinomial: {} divided by binomial: {} = ", trinomial.format_pretty(), binomial1.format_pretty());
+    println!(
+        "Trinomial: {} divided by binomial: {} = ",
+        trinomial.format_pretty(),
+        binomial1.format_pretty()
+    );
     match quadratic_fx.divide(&binomial1) {
         Ok((quotient, remainder)) => {
             println!("Quotient: {}", quotient.format_pretty());

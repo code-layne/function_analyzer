@@ -10,6 +10,9 @@ pub struct Rational {
 
 impl Rational {
     pub fn new(numerator: Polynomial, denominator: Polynomial) -> Rational {
-        Rational { numerator, denominator }
+        Rational {
+            numerator,
+            denominator,
+        }
     }
 }

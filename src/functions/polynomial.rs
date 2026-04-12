@@ -244,8 +244,8 @@ mod tests {
 
     #[test]
     fn add_equal_degrees() {
-        let p1 = Polynomial::new(vec!(1.0, 2.0));
-        let p2 = Polynomial::new(vec!(2.0, 3.0));
+        let p1 = Polynomial::new(vec![1.0, 2.0]);
+        let p2 = Polynomial::new(vec![2.0, 3.0]);
         let result = p1.add(&p2);
         assert_eq!(result.degree(), 1);
         assert_eq!(result.coefficients, vec!(3.0, 5.0));
@@ -253,8 +253,8 @@ mod tests {
 
     #[test]
     fn add_different_degrees() {
-        let p1 = Polynomial::new(vec!(1.0, 2.0));
-        let p2 = Polynomial::new(vec!(2.0, 3.0, 4.0));
+        let p1 = Polynomial::new(vec![1.0, 2.0]);
+        let p2 = Polynomial::new(vec![2.0, 3.0, 4.0]);
         let result = p1.add(&p2);
         assert_eq!(result.degree(), 2);
         assert_eq!(result.coefficients, vec!(2.0, 4.0, 6.0));
@@ -262,16 +262,16 @@ mod tests {
 
     #[test]
     fn subtract_same_degree() {
-        let p1 = Polynomial::new(vec!(1.0, 2.0));
-        let p2 = Polynomial::new(vec!(2.0, 3.0));
+        let p1 = Polynomial::new(vec![1.0, 2.0]);
+        let p2 = Polynomial::new(vec![2.0, 3.0]);
         let result = p2.subtract(&p1);
         assert_eq!(result.degree(), 1);
         assert_eq!(result.coefficients, vec!(1.0, 1.0));
     }
     #[test]
     fn subtract_inverse() {
-        let p1 = Polynomial::new(vec!(1.0, 2.0));
-        let p2 = Polynomial::new(vec!(1.0, 2.0));
+        let p1 = Polynomial::new(vec![1.0, 2.0]);
+        let p2 = Polynomial::new(vec![1.0, 2.0]);
         let result = p2.subtract(&p1);
         assert_eq!(result.degree(), 0);
         assert_eq!(result.is_zero(), true);
@@ -279,9 +279,9 @@ mod tests {
 
     #[test]
     fn multiply_monomial_binomial() {
-        let monomial = Polynomial::new(vec!(2.0, 0.0));
+        let monomial = Polynomial::new(vec![2.0, 0.0]);
         assert_eq!(monomial.degree(), 1);
-        let binomial = Polynomial::new(vec!(2.0, 3.0));
+        let binomial = Polynomial::new(vec![2.0, 3.0]);
         assert_eq!(binomial.degree(), 1);
         let product = monomial.multiply(&binomial);
         assert_eq!(product.degree(), 2);
@@ -290,16 +290,16 @@ mod tests {
 
     #[test]
     fn multiply_binomial_binomial() {
-        let binomial1 = Polynomial::new(vec!(1.0, -3.0));
-        let binomial2 = Polynomial::new(vec!(1.0, 2.0));
+        let binomial1 = Polynomial::new(vec![1.0, -3.0]);
+        let binomial2 = Polynomial::new(vec![1.0, 2.0]);
         let product = binomial1.multiply(&binomial2);
         assert_eq!(product.degree(), 2);
         assert_eq!(product.coefficients, vec!(1.0, -1.0, -6.0));
     }
     #[test]
     fn multiply_binomial_trinomial() {
-        let binomial = Polynomial::new(vec!(1.0, -3.0));
-        let trinomial = Polynomial::new(vec!(1.0, 2.0, 3.0));
+        let binomial = Polynomial::new(vec![1.0, -3.0]);
+        let trinomial = Polynomial::new(vec![1.0, 2.0, 3.0]);
         let product = binomial.multiply(&trinomial);
         assert_eq!(product.degree(), 3);
         assert_eq!(product.coefficients, vec!(1.0, -1.0, -3.0, -9.0));
@@ -307,8 +307,8 @@ mod tests {
 
     #[test]
     fn multiply_trinomial_trinomial() {
-        let trinomial1 = Polynomial::new(vec!(1.0, 2.0, 1.0));
-        let trinomial2 = Polynomial::new(vec!(1.0, 4.0, 4.0));
+        let trinomial1 = Polynomial::new(vec![1.0, 2.0, 1.0]);
+        let trinomial2 = Polynomial::new(vec![1.0, 4.0, 4.0]);
         let product = trinomial1.multiply(&trinomial2);
         assert_eq!(product.degree(), 4);
         assert_eq!(product.coefficients, vec!(1.0, 6.0, 13.0, 12.0, 4.0));
@@ -316,8 +316,8 @@ mod tests {
 
     #[test]
     fn synthetic_division() {
-        let trinomial = Polynomial::new(vec!(2.0, -2.0, 1.0));
-        let binomial = Polynomial::new(vec!(1.0, 3.0));
+        let trinomial = Polynomial::new(vec![2.0, -2.0, 1.0]);
+        let binomial = Polynomial::new(vec![1.0, 3.0]);
         let root = binomial.coefficients.last().unwrap();
 
         let (dividend, remainder) = trinomial.synthetic_divide(-root);
@@ -341,6 +341,6 @@ mod tests {
 
     #[test]
     fn foobar() {
-        let function = Polynomial::new(vec!(1.0, 2.0));
+        let function = Polynomial::new(vec![1.0, 2.0]);
     }
 }
