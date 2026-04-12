@@ -202,7 +202,7 @@ impl Polynomial {
 
     pub fn monomial(coefficient: f64, power: usize) -> Polynomial {
         let mut coefficients = vec![coefficient];
-        coefficients.extend(std::iter::repeat(0.0).take(power));
+        coefficients.extend(std::iter::repeat_n(0.0, power));
         Polynomial::new(coefficients)
     }
 
@@ -239,7 +239,7 @@ mod tests {
         let null_fx = Polynomial::new(Vec::new());
         assert_eq!(null_fx.degree(), 0);
         assert_eq!(null_fx.y_intercept(), 0.0);
-        assert_eq!(null_fx.is_zero(), true);
+        assert!(null_fx.is_zero());
     }
 
     #[test]
@@ -274,7 +274,7 @@ mod tests {
         let p2 = Polynomial::new(vec![1.0, 2.0]);
         let result = p2.subtract(&p1);
         assert_eq!(result.degree(), 0);
-        assert_eq!(result.is_zero(), true);
+        assert!(result.is_zero());
     }
 
     #[test]
