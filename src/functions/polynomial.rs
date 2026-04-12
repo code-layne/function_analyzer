@@ -45,20 +45,20 @@ impl Polynomial {
         let offset_self = max_len - self.coefficients.len();
         let offset_other = max_len - other.coefficients.len();
 
-        for (i, _item) in result.iter_mut().enumerate().take(max_len) {
-            let a = if i >= offset_self {
-                self.coefficients[i - offset_self]
+        for index in 0..max_len {
+            let a = if index >= offset_self {
+                self.coefficients[index - offset_self]
             } else {
                 0.0
             };
 
-            let b = if i >= offset_other {
-                other.coefficients[i - offset_other]
+            let b = if index >= offset_other {
+                other.coefficients[index - offset_other]
             } else {
                 0.0
             };
 
-            *_item = a + b;
+            result[index] = a + b;
         }
 
         Polynomial::new(result)
