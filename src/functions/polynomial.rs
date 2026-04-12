@@ -2,7 +2,7 @@
 pub struct Polynomial {
     /// Coefficients in descending degree order.
     /// Example: x^2 - 4x + 3 => vec![1.0, -4.0, 3.0]
-    pub coefficients: Vec<f64>,
+    coefficients: Vec<f64>,
 }
 #[derive(Debug)]
 pub enum PolynomialError {
@@ -339,4 +339,8 @@ mod tests {
         //todo
     }
 
+    #[test]
+    fn foobar() {
+        let function = Polynomial::new(vec!(1.0, 2.0));
+    }
 }
