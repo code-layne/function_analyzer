@@ -19,10 +19,10 @@ RUN cargo build --release --bin function_analyzer
 
 # 4) Minimal runtime image
 FROM alpine:3.20 AS runtime
--LABEL org.opencontainers.image.title="function_analyzer"
--LABEL org.opencontainers.image.source="https://github.com/code-layne/function_analyzer"
--LABEL org.opencontainers.image.description="Rust polynomial/function analysis engine"
--LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.title="function_analyzer"
+LABEL org.opencontainers.image.source="https://github.com/code-layne/function_analyzer"
+LABEL org.opencontainers.image.description="Rust polynomial/function analysis engine"
+LABEL org.opencontainers.image.licenses="MIT"
 WORKDIR /app
 RUN apk add --no-cache libgcc
 
