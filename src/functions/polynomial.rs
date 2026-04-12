@@ -338,9 +338,4 @@ mod tests {
     fn returns_error_divide_by_zero() {
         //todo
     }
-
-    #[test]
-    fn foobar() {
-        let function = Polynomial::new(vec![1.0, 2.0]);
-    }
 }
