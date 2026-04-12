@@ -45,7 +45,7 @@ impl Polynomial {
         let offset_self = max_len - self.coefficients.len();
         let offset_other = max_len - other.coefficients.len();
 
-        for i in 0..max_len {
+        for (i, _item) in result.iter_mut().enumerate().take(max_len) {
             let a = if i >= offset_self {
                 self.coefficients[i - offset_self]
             } else {
@@ -58,7 +58,7 @@ impl Polynomial {
                 0.0
             };
 
-            result[i] = a + b;
+            *_item = a + b;
         }
 
         Polynomial::new(result)
