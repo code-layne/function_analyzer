@@ -1,9 +1,10 @@
-use crate::core::types::{Domain, FunctionAnalysis, Point};
+use crate::core::types::{Domain, FunctionAnalysis, Point, Range};
 
 pub trait Function {
     fn evaluate(&self, x: f64) -> f64;
 
     fn domain(&self) -> Domain;
+    fn range(&self) -> Range;
 }
 
 pub trait AnalyzableFunction: Function {
