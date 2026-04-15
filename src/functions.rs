@@ -3,6 +3,6 @@ pub mod rational;
 
 pub mod radical;
 
-pub mod piecewise;
 mod exponential;
 mod logarithmic;
+pub mod piecewise;
