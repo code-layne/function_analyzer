@@ -21,11 +21,11 @@ impl Rational {
         let denominator = &self.denominator;
         if numerator.degree() == denominator.degree() {
             let ratio = numerator.leading_coefficient() / denominator.leading_coefficient();
-            Polynomial::new(vec![ratio]);
+            Polynomial::new(vec![ratio])
         } else if numerator.degree() > denominator.degree() {
-            Polynomial::new(vec![]);
+            Polynomial::new(vec![])
         } else {
-            Polynomial::new(vec![0.0]);
+            Polynomial::new(vec![0.0])
         }
     }
 }
