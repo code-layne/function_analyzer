@@ -1,4 +1,4 @@
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub struct Polynomial {
     /// Coefficients in descending degree order.
     /// Example: x^2 - 4x + 3 => vec![1.0, -4.0, 3.0]
@@ -64,11 +64,6 @@ impl Polynomial {
         Polynomial::new(result)
     }
 
-    pub fn evaluate(&self, x: f64) -> f64 {
-        // Horner's method
-        self.coefficients.iter().fold(0.0, |acc, &c| acc * x + c)
-    }
-
     pub fn derivative(&self) -> Self {
         let degree = self.degree();
 
@@ -92,6 +87,11 @@ impl Polynomial {
 
     pub fn y_intercept(&self) -> f64 {
         self.evaluate(0.0)
+    }
+
+    pub fn evaluate(&self, x: f64) -> f64 {
+        // Horner's method
+        self.coefficients.iter().fold(0.0, |acc, &c| acc * x + c)
     }
 
     pub fn leading_coefficient(&self) -> f64 {
