@@ -1,0 +1,40 @@
+# Rust build artifacts
+target/
+debug/
+release/
+
+# Cargo metadata / local caches
+.cargo/
+
+# Git
+.git/
+.gitignore
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.*
+
+# Logs
+*.log
+
+# Docker / compose overrides (optional)
+docker-compose.override.yml
+
+# Test / temp outputs
+*.tmp
+*.bak
+
+# Generated artifacts
+*.png
+*.svg
+*.pdf
